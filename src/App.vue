@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <hello></hello>
+    <main-frame></main-frame>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello';
+import MainFrame from './components/MainFrame';
 
 export default {
   name: 'app',
   components: {
-    Hello,
+    MainFrame,
   },
 };
 </script>
