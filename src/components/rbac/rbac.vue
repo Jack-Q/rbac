@@ -1,32 +1,34 @@
 <template>
   <ui-tabs type="icon" fullwidth>
-    <ui-tab icon="book">
-      User
-    </ui-tab>
-  
     <ui-tab icon="person">
-      Role
+      <user></user>
     </ui-tab>
   
-    <ui-tab icon="collections_bookmark">
-      Permission
+    <ui-tab icon="group">
+      <role></role>
     </ui-tab>
   
-    <ui-tab icon="favorite">
-
-      Data
-      <b>Favourite with longer content</b>
-  
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dolorum laudantium nulla ex asperiores, deserunt quidem perspiciatis eligendi, dolores repudiandae.</p>
-  
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis hic, aspernatur placeat eligendi delectus laudantium omnis nam consequatur aperiam numquam!</p>
+    <ui-tab icon="pan_tool">
+      <permission></permission>
     </ui-tab>
+  
+    <ui-tab icon="domain">
+      <data-record></data-record>
+   </ui-tab>
   </ui-tabs>
 </template>
 
 <script>
-export default {
 
+import DataRecord from './data-record';
+import Permission from './permission';
+import Role from './role';
+import User from './user';
+
+export default {
+  components: {
+    User, Role, Permission, DataRecord,
+  },
 };
 </script>
 
