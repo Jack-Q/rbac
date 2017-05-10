@@ -1,5 +1,7 @@
-import {} from '../model';
-
+import User from '~/model/user';
+import Role from '~/model/role';
+import Permission from '~/model/permission';
+import Resource from '~/model/resource';
 class Store {
   constructor() {
     this.users = [];
@@ -11,7 +13,26 @@ class Store {
   }
 
   addUser() {
-    this.users.push({});
+    this.users.push(new User());
+  }
+  addRole() {
+    this.roles.push(new Role());
+  }
+  addPermission() {
+    this.permission.push(new Permission());
+  }
+  addResource() {
+    this.resources.push(new Resource());
   }
 }
-export default new Store();
+
+const store = new Store();
+
+store.addUser();
+store.addUser();
+store.addUser();
+store.addResource();
+store.addResource();
+store.addResource();
+
+export default store;

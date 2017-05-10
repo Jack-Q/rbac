@@ -3,12 +3,19 @@
     <header>
       CABR Mgmt. System
     </header>
+    <div v-for="r in getResources()">
+      <ui-button>{{r.name}}({{r.id}})</ui-button>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
+import store from '#';
 
+export default {
+  methods: {
+    getResources: () => store.resources,
+  }
 };
 </script>
 
