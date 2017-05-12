@@ -4,8 +4,14 @@
       CABR Mgmt. System
     </header>
     <div class="content">
-      <div v-for="r in getResources()" class="resource">
-        <div @click="handleClick($event, r.id, getUserId())" 
+      <div class="user" v-if="getUser()">
+        Logged as {{getUser().name}}.
+      </div>
+      <div class="user" v-else>
+        guest mode
+      </div>
+      <div class="resource">
+        <div v-for="r in getResources()" @click="handleClick($event, r.id, getUserId())" 
              @dblclick="handleClick($event, r.id, getUserId())" @contextmenu="handleContextMenu($event, r.id,  getUserId())">
           <ui-button>{{r.name}}({{r.id}})</ui-button>
         </div>
@@ -44,7 +50,7 @@ export default {
 
       
     },
-    handleContextMenu(){
+    handleContextMenu(e, resourceId, userId){
       store.emit({action: 'right-click', resourceId, userId});
       e.preventDefault();
     }
@@ -72,15 +78,27 @@ header {
 .content {
   padding-top: 40px;
 }
+.user {
+  font-size: 0.8em;
+  font-weight: 900;
+  border-top: dotted 1px #999;
+  border-bottom: dotted 1px #999;
+}
 
 .resource {
   padding: 10px;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
 }
 
-.resource button {
+.resource > div {
   flex: 1;
-  margin: 0 20px;
+  margin: 10px 30px;
+  position: relative;
+}
+.resource button{
+  width: 100%;
 }
 </style>

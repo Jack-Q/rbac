@@ -9,6 +9,7 @@
     <template v-if="user">
       <ui-textbox floating-label label="Name" placeholder="user name" v-model="user.name"></ui-textbox>
       <div class="actions">
+        <ui-button @click="login(user)">log in CABR</ui-button>
         <div>
           <ui-select has-search label="Role" placeholder="Search role to add" :keys="{ label: 'name', value: 'id' }" :options="getRolesNotUser(user)" v-model="roleToAdd"></ui-select>
           <ui-button :disabled="!roleToAdd" @click="addRoleToUser(roleToAdd, user)">Add Role to User</ui-button>
@@ -49,6 +50,7 @@ export default {
     getRolesNotUser: (u) => store.roles.filter(r => !getRoles(u).some(ur => ur.role === r.id)),
     addRoleToUser: (r, u) => store.addRoleToUser(r, u),
     removeRoleFromUser: (r, u) => store.removeRoleFromUser(r, u),
+    login: u => store.login(u),
   },
   components: {
     TabContent,
