@@ -4,6 +4,8 @@ import Vue from 'vue';
 import KeenUI from 'keen-ui';
 import 'keen-ui/dist/keen-ui.css';
 
+import store from '~/store';
+
 import App from './App';
 
 Vue.use(KeenUI);
@@ -12,6 +14,7 @@ Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  data: store,
   template: '<App/>',
   components: { App },
 });

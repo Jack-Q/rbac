@@ -14,7 +14,7 @@
       </ui-button>
       <tab-content>
         <div slot="list" v-for="p in getPermissions()" @click="permission = p">
-          <aside-link :active="p === permission">{{p.name}}</aside-link>
+          <aside-link :active="p === permission">{{p.toString()}}</aside-link>
         </div>
       </tab-content>
     </div>

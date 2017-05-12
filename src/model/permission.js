@@ -6,4 +6,8 @@ export default class Permission {
     this.resource = resource;
     this.action = action;
   }
+
+  toString() {
+    return `${this.action} ${this.resource}`;
+  }
 }

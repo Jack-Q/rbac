@@ -33,7 +33,7 @@
         <table>
           <thead></thead>
           <tbody>
-            <tr v-for="i in getUsers()">
+            <tr v-for="i in getRoles()">
               <td>{{i.id}}</td>
               <td>{{i.name}}</td>
             </tr>
@@ -59,13 +59,14 @@
           <tbody>
             <tr v-for="i in getPermissions()">
               <td>{{i.id}}</td>
-              <td>{{i.name}}</td>
+              <td>{{i.resource}}</td>
+              <td>{{i.action}}</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="tab">
-        <div>Resorce Data</div>
+        <div>Resource Data</div>
         <table>
           <thead></thead>
           <tbody>

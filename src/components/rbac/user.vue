@@ -1,7 +1,13 @@
 <template>
   <tab-content>
     <div slot="list" v-for="u in getUsers()" @click="user = u">
-      <aside-link :active="u === user">{{u.name}}</aside-link>
+      <aside-link :active="u === user">
+        {{u.name}}
+        <span slot="sub">{{u.id}}</span>
+      </aside-link>
+    </div>
+    <div v-if="user">
+      <ui-textbox floating-label label="Name" placeholder="user name" v-model="user.name"></ui-textbox>
     </div>
   </tab-content>
 </template>
