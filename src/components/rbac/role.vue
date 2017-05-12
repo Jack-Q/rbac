@@ -16,7 +16,8 @@
       </div>
       <div>
         <div v-for="u in getUsersInRole(role)" class="roleUser">
-          {{u.name}} ({{u.id}})
+          <div>{{u.name}} ({{u.id}})</div>
+          <ui-icon-button icon="remove" type="secondary" @click="removeRoleFromUser(role, u)"></ui-icon-button>
         </div>
       </div>
     </div>
@@ -39,7 +40,7 @@ export default {
   },
   beforeUpdate() {
     if(this.role && this.userToAdd && getInRole(this.role).find(ur => ur.user === this.userToAdd.id)){
-      this.userToAdd = null;
+      this.userToAdd = "";
     }
   },
   methods: {
@@ -47,6 +48,7 @@ export default {
     getUsersInRole: (r) => getInRole(r).map(ur => store.users.find(u => u.id === ur.user)),
     getUsersExRole: (r) => store.users.filter(u => !getInRole(r).some(ur => ur.user === u.id)),
     addRoleToUser: (r, u) => store.addRoleToUser(r, u),
+    removeRoleFromUser: (r, u) => store.removeRoleFromUser(r, u),
   },
   components: {
     TabContent,

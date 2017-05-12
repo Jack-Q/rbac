@@ -31,6 +31,9 @@ class Store {
   addRoleToUser(r, u) {
     this.userRoles.push(new UserRole(u.id, r.id));
   }
+  removeRoleFromUser(r, u){
+    this.userRoles.splice(this.userRoles.findIndex(ur => ur.user === u.id && ur.role === r.id), 1);
+  }
 }
 
 const store = new Store();
