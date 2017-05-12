@@ -95,15 +95,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .tables {
   display: flex;
   overflow-x: auto;
   width: 100%;
+  height: 100%;
 }
 
 .tab {
   flex: 1;
   min-width: 200px;
+  height: 100%;
 }
 </style>

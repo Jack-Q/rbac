@@ -2,16 +2,28 @@
   <div class="content">
     <div class="left-panel">
       <div class="left-toolbar">
-        
+        <ui-select label="Resource" placeholder="Select an resource" :options="getResources()" v-model="resource" :keys="{label:'id'}"></ui-select>
       </div>
       <div>
         <div v-for="p in getPermissions()" @click="permission = p">
-            <aside-link :active="p === permission">{{p.name}}</aside-link>
+          <aside-link :active="p === permission">{{p.name}}</aside-link>
         </div>
       </div>
     </div>
     <div class="right-panel">
-
+      <div v-if="resource">
+        <div>Resource: {{resource.name || "Unnamed"}}({{resource.id}})</div>
+        <ui-button color="primary" has-dropdown ref="addResourceButton">
+          <ui-menu contain-focus has-icons has-secondary-text slot="dropdown" 
+            :options="getUnmappedActions()"
+            @select="createPermission(resource, $event)"
+            @close="$refs.addResourceButton.closeDropdown()"></ui-menu>
+          Add Permission
+        </ui-button>
+      </div>
+      <div v-else>
+        Select an resource
+      </div>
     </div>
   </div>
 </template>
@@ -20,7 +32,7 @@
 import store from '~/store/index';
 
 export default {
-  data(){
+  data() {
     return {
       resource: null,
       permission: null,
@@ -29,6 +41,8 @@ export default {
   methods: {
     getPermissions: () => store.permissions,
     getResources: () => store.resources,
+    getUnmappedActions: (resource) => ["add", "drop", "create"],
+    createPermission: (resource, action) => store.addPermission(resource, action),
   },
   components: {
     'aside-link': {
@@ -45,18 +59,22 @@ export default {
 };
 </script>
 
-<style>
-.content{
+<style scoped>
+.content {
   display: flex;
+  height: 100%;
 }
-.left-panel{
+
+.left-panel {
   width: 200px;
   background: #eeeeee;
 }
-.right-panel{
+
+.right-panel {
   flex: 1;
 }
-.aside-link{
+
+.aside-link {
   position: relative;
   display: block;
   height: 50px;

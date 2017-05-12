@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import store from '#';
+import store from '~/store/index';
 
 export default {
   methods: {
@@ -42,6 +42,7 @@ header{
 .resource{
   padding: 10px;
   display: flex;
+  flex-direction: column;
 }
 .resource button{
   flex: 1;

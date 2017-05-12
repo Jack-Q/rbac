@@ -8,7 +8,7 @@
       <role></role>
     </ui-tab>
   
-    <ui-tab icon="pan_tool">
+    <ui-tab icon="security">
       <permission></permission>
     </ui-tab>
   
@@ -35,5 +35,12 @@ export default {
 <style>
 .ui-tabs__body{
   padding: 0;
+  height: 100%;
+}
+.ui-tabs{
+  margin-bottom: 0;
+}
+.ui-tab{
+  height: calc(100vh - 83px);
 }
 </style>

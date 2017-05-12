@@ -43,9 +43,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .content{
   display: flex;
+  height: 100%;
 }
 .left-panel{
   width: 200px;
