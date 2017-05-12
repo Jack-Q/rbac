@@ -14,6 +14,8 @@ class Store {
     this.userRoles = [];
     this.rolePermissions = [];
     this.resources = [];
+
+    this.loginUser = null;
   }
 
   addUser() {
@@ -42,6 +44,18 @@ class Store {
   }
   getPermissionLabel(p) {
     return `${p.action} ${this.resources.find(r => r.id === p.resource).name}`;
+  }
+
+  login(user) {
+    this.loginUser = user;
+  }
+
+  logout() {
+    this.loginUser = null;
+  }
+
+  emit (event) {
+    console.log(event);
   }
 }
 
