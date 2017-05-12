@@ -28,13 +28,14 @@
           <div class="actions">
             <div>
               <ui-select has-search label="Permission" placeholder="Search permission to add" 
-                :keys="{ label: 'name', value: 'id' }" :options="getUsersExRole(role)" v-model="userToAdd"></ui-select>
-              <ui-button :disabled="!permissionToAdd" @click="addPermissionToRole(permissionToAdd, role)">Attach Permission to Role</ui-button>
+                :keys="{ label: 'label', value: 'id' }" :options="getPermissionsWithoutRole(role)" v-model="permissionToAdd">
+              </ui-select>
+              <ui-button :disabled="!permissionToAdd" @click="addPermissionToRole(permissionToAdd.permission, role)">Attach Permission to Role</ui-button>
             </div>
           </div>
           <div>
             <div v-for="p in getPermissionsWithRole(role)" class="roleUser">
-              <div>{{p.action}} {{p.resource}} ({{p.id}})</div>
+              <div>{{getPermissionLabel(p)}} ({{p.id}})</div>
               <ui-icon-button icon="remove" type="secondary" @click="removePermissionFromRole(p, role)"></ui-icon-button>
             </div>
           </div>
@@ -64,7 +65,7 @@ export default {
     if (this.role && this.userToAdd && getInRole(this.role).find(ur => ur.user === this.userToAdd.id)) {
       this.userToAdd = "";
     }
-    if (this.role && this.permissionToAdd && getWithRole(this.role).find(rp => rp.permission === this.permissionToAdd.id)) {
+    if (this.role && this.permissionToAdd && getWithRole(this.role).find(rp => rp.permission === this.permissionToAdd.permission.id)) {
       this.permissionToAdd = "";
     }
   },
@@ -75,9 +76,11 @@ export default {
     addRoleToUser: (r, u) => store.addRoleToUser(r, u),
     removeRoleFromUser: (r, u) => store.removeRoleFromUser(r, u),
     getPermissionsWithRole: (r) => getWithRole(r).map(rp => store.permissions.find(p => p.id === rp.permission)),
-    getPermissionsWithoutRole: (r) => store.permissions.filter(p => !getWithRole(r).some(rp => rp.permission === p.id)),
+    getPermissionsWithoutRole: (r) => store.permissions.filter(p => !getWithRole(r).some(rp => rp.permission === p.id))
+        .map(p => ({id: p.id, label: store.getPermissionLabel(p), permission: p})),
     addPermissionToRole: (p, r) => store.addPermissionToRole(p, r),
     removePermissionFromRole: (p, r) => store.removePermissionFromRole(p, r),
+    getPermissionLabel: (p) => store.getPermissionLabel(p),
   },
   components: {
     TabContent,

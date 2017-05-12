@@ -40,6 +40,9 @@ class Store {
   removePermissionFromRole(p, r) {
     this.rolePermissions.splice(this.rolePermissions.findIndex(rp => rp.role === r.id && rp.permission === p.id), 1);
   }
+  getPermissionLabel(p) {
+    return `${p.action} ${this.resources.find(r => r.id === p.resource).name}`;
+  }
 }
 
 const store = new Store();
