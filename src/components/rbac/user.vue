@@ -1,16 +1,16 @@
 <template>
-  <tab-content>
+  <tab-content fullHeight>
     <div slot="list" v-for="u in getUsers()" @click="user = u">
       <aside-link :active="u === user">
         {{u.name}}
         <span slot="sub">{{u.id}}</span>
       </aside-link>
     </div>
-    <div v-if="user">
+    <template v-if="user">
       <ui-textbox floating-label label="Name" placeholder="user name" v-model="user.name"></ui-textbox>
       <div class="actions">
         <div>
-          <ui-select has-search label="Role" placeholder="Search user to add" :keys="{ label: 'name', value: 'id' }" :options="getRolesNotUser(user)" v-model="roleToAdd"></ui-select>
+          <ui-select has-search label="Role" placeholder="Search role to add" :keys="{ label: 'name', value: 'id' }" :options="getRolesNotUser(user)" v-model="roleToAdd"></ui-select>
           <ui-button :disabled="!roleToAdd" @click="addRoleToUser(roleToAdd, user)">Add Role to User</ui-button>
         </div>
       </div>
@@ -20,7 +20,7 @@
           <ui-icon-button icon="remove" type="secondary" @click="removeRoleFromUser(r, user)"></ui-icon-button>
         </div>
       </div>
-    </div>
+    </template>
   </tab-content>
 </template>
 

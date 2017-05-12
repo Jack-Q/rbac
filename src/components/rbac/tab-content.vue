@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content" :style="{height: fullHeight?'100%':''}">
     <div class="left-panel">
       <div class="left-toolbar">
         <slot name="toolbar"></slot>
@@ -16,21 +16,28 @@
 
 <script>
 export default {
+  props: {
+    fullHeight: { required: false, type: Boolean },
+  },
 
 }
 </script>
 
 <style scoped>
-.content{
+.content {
   display: flex;
   height: 100%;
-}
-.left-panel{
-  width: 200px;
-  background: #eeeeee;
-}
-.right-panel{
   flex: 1;
 }
 
+.left-panel {
+  width: 200px;
+  background: #eeeeee;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 </style>

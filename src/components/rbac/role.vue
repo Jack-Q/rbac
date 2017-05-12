@@ -1,5 +1,5 @@
 <template>
-  <tab-content>
+  <tab-content fullHeight>
     <div slot="list" v-for="r in getRoles()" @click="role = r">
       <aside-link :active="r === role">
         {{r.name}}
@@ -7,17 +7,37 @@
       </aside-link>
     </div>
     <div v-if="role">
+  
       <ui-textbox floating-label label="Role Name" placeholder="role name" v-model="role.name"></ui-textbox>
-      <div class="actions">
+      <div class="main-panel">
         <div>
-          <ui-select has-search label="User" placeholder="Search user to add" :keys="{ label: 'name', value: 'id' }" :options="getUsersExRole(role)" v-model="userToAdd"></ui-select>
-          <ui-button :disabled="!userToAdd" @click="addRoleToUser(role, userToAdd)">Add Role to User</ui-button>
+          <div class="actions">
+            <div>
+              <ui-select has-search label="User" placeholder="Search user to add" :keys="{ label: 'name', value: 'id' }" :options="getUsersExRole(role)" v-model="userToAdd"></ui-select>
+              <ui-button :disabled="!userToAdd" @click="addRoleToUser(role, userToAdd)">Add Role to User</ui-button>
+            </div>
+          </div>
+          <div>
+            <div v-for="u in getUsersInRole(role)" class="roleUser">
+              <div>{{u.name}} ({{u.id}})</div>
+              <ui-icon-button icon="remove" type="secondary" @click="removeRoleFromUser(role, u)"></ui-icon-button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-        <div v-for="u in getUsersInRole(role)" class="roleUser">
-          <div>{{u.name}} ({{u.id}})</div>
-          <ui-icon-button icon="remove" type="secondary" @click="removeRoleFromUser(role, u)"></ui-icon-button>
+        <div>
+          <div class="actions">
+            <div>
+              <ui-select has-search label="Permission" placeholder="Search permission to add" 
+                :keys="{ label: 'name', value: 'id' }" :options="getUsersExRole(role)" v-model="userToAdd"></ui-select>
+              <ui-button :disabled="!permissionToAdd" @click="addPermissionToRole(permissionToAdd, role)">Attach Permission to Role</ui-button>
+            </div>
+          </div>
+          <div>
+            <div v-for="p in getPermissionsWithRole(role)" class="roleUser">
+              <div>{{p.action}} {{p.resource}} ({{p.id}})</div>
+              <ui-icon-button icon="remove" type="secondary" @click="removePermissionFromRole(p, role)"></ui-icon-button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -30,17 +50,22 @@ import TabContent from './tab-content';
 import AsideLink from './aside-link';
 
 const getInRole = r => store.userRoles.filter(ur => ur.role === r.id);
+const getWithRole = r => store.rolePermissions.filter(rp => rp.role === r.id);
 
 export default {
   data() {
     return {
       role: "",
       userToAdd: "",
+      permissionToAdd: "",
     };
   },
   beforeUpdate() {
-    if(this.role && this.userToAdd && getInRole(this.role).find(ur => ur.user === this.userToAdd.id)){
+    if (this.role && this.userToAdd && getInRole(this.role).find(ur => ur.user === this.userToAdd.id)) {
       this.userToAdd = "";
+    }
+    if (this.role && this.permissionToAdd && getWithRole(this.role).find(rp => rp.permission === this.permissionToAdd.id)) {
+      this.permissionToAdd = "";
     }
   },
   methods: {
@@ -49,6 +74,10 @@ export default {
     getUsersExRole: (r) => store.users.filter(u => !getInRole(r).some(ur => ur.user === u.id)),
     addRoleToUser: (r, u) => store.addRoleToUser(r, u),
     removeRoleFromUser: (r, u) => store.removeRoleFromUser(r, u),
+    getPermissionsWithRole: (r) => getWithRole(r).map(rp => store.permissions.find(p => p.id === rp.permission)),
+    getPermissionsWithoutRole: (r) => store.permissions.filter(p => !getWithRole(r).some(rp => rp.permission === p.id)),
+    addPermissionToRole: (p, r) => store.addPermissionToRole(p, r),
+    removePermissionFromRole: (p, r) => store.removePermissionFromRole(p, r),
   },
   components: {
     TabContent,
@@ -58,5 +87,10 @@ export default {
 </script>
 
 <style scoped>
-
+.main-panel{
+  display: flex;
+}
+.main-panel > div {
+  flex: 1;
+}
 </style>

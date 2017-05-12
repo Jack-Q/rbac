@@ -34,6 +34,12 @@ class Store {
   removeRoleFromUser(r, u){
     this.userRoles.splice(this.userRoles.findIndex(ur => ur.user === u.id && ur.role === r.id), 1);
   }
+  addPermissionToRole(p, r) {
+    this.rolePermissions.push(new RolePermission(r.id, p.id));
+  }
+  removePermissionFromRole(p, r) {
+    this.rolePermissions.splice(this.rolePermissions.findIndex(rp => rp.role === r.id && rp.permission === p.id), 1);
+  }
 }
 
 const store = new Store();
