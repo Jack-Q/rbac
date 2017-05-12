@@ -174,6 +174,6 @@ a {
   top: 40px;
 }
 .main-right{
-  flex: 1;
+  width: calc(100vw - 350px);
 }
 </style>

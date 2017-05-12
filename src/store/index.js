@@ -34,5 +34,8 @@ store.addUser();
 store.addResource();
 store.addResource();
 store.addResource();
+store.addRole();
+store.addRole();
+store.addRole();
 
 export default store;
