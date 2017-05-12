@@ -33,5 +33,7 @@ export default {
 </script>
 
 <style>
-
+.ui-tabs__body{
+  padding: 0;
+}
 </style>

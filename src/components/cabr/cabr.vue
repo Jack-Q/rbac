@@ -3,8 +3,10 @@
     <header>
       CABR Mgmt. System
     </header>
-    <div v-for="r in getResources()">
-      <ui-button>{{r.name}}({{r.id}})</ui-button>
+    <div class="content">
+      <div v-for="r in getResources()" class="resource">
+        <ui-button>{{r.name}}({{r.id}})</ui-button>
+      </div>
     </div>
   </div>
 </template>
@@ -19,18 +21,30 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 .cabr{
   position: relative;
   overflow: hidden;
   background: #bcd;
 }
 header{
-  height: 20px;
+  height: 40px;
+  line-height: 40px;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   text-align: center;
+}
+.content{
+  padding-top: 40px;
+}
+.resource{
+  padding: 10px;
+  display: flex;
+}
+.resource button{
+  flex: 1;
+  margin: 0 20px;
 }
 </style>
