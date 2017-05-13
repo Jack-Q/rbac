@@ -29,10 +29,10 @@
     </div>
     <div class="main">
       <div class="main-left">
-        <div class="cabr">
+        <div class="cabr" :class="{drop: getEvent()}">
           <cabr></cabr>
         </div>
-        <div class="event" v-if="getEvent()">
+        <div class="event" :class="{drop: getEvent()}">
           <event-view></event-view>
         </div>
       </div>
@@ -58,7 +58,7 @@ export default {
     };
   },
   methods: {
-    getEvent: ()=> store.event,
+    getEvent: () => store.event,
   },
   components: {
     Cabr, Rbac, EventView,
@@ -67,7 +67,7 @@ export default {
 </script>
 
 <style scoped>
-.container{
+.container {
   height: 100%;
 }
 
@@ -158,12 +158,14 @@ a {
   letter-spacing: 8px;
   transition: inherit;
 }
+
 .header-left:hover {
   padding-left: 20px;
   word-spacing: 2px;
   min-width: 270px;
 }
-.header-left:hover span{
+
+.header-left:hover span {
   max-width: 150px;
   letter-spacing: -1px;
 }
@@ -174,39 +176,70 @@ a {
   transition: all ease 400ms;
 }
 
-.header-right:hover{
-  background: rgba(255,255,255,0.2);
+.header-right:hover {
+  padding-left: 30px;
+  padding-right: 85px;
+  color: #666;
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .header-right a {
   color: inherit;
   text-decoration: none;
 }
+
 .header-right svg {
   fill: #999;
   vertical-align: middle;
 }
-.main{
+
+.main {
   display: flex;
   height: 100%;
 }
-.main-left{
+
+.main-left {
   width: 350px;
   position: relative;
+  padding: 30px 10px;
+  box-shadow: inset 0 0 120px 20px rgba(20, 20, 20, 0.3);
 }
-.cabr{
-  box-shadow: inset 0 0 20px 5px rgba(20,20,20,0.3);
+
+.cabr {
+  border-radius: 30px;
+  box-shadow: inset 0 0 20px 5px rgba(20, 20, 20, 0.3);
   height: 100%;
   width: 100%;
+  transition: all ease 400ms;
+  transform-origin: bottom center;
+  max-height: 550px;
 }
-.event{
+
+.cabr.drop {
+  transform: rotateX(50deg);
+  filter: blur(2px);
+}
+
+.event {
+  left: 0;
   position: absolute;
   padding: 30px;
   top: 40px;
   z-index: 100;
   width: 100%;
+  transition: all ease 400ms;
+  transform: translateY(-300px);
+  pointer-events: none;
+  opacity: 0;
 }
-.main-right{
+
+.event.drop {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.main-right {
   width: calc(100vw - 350px);
 }
 </style>
