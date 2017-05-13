@@ -15,31 +15,31 @@
       <div class="main-panel">
         <div>
           <div class="actions">
-            <div>
-              <ui-select has-search label="User" placeholder="Search user to add" :keys="{ label: 'name', value: 'id' }" :options="getUsersExRole(role)" v-model="userToAdd"></ui-select>
-              <ui-button :disabled="!userToAdd" @click="addRoleToUser(role, userToAdd)">Add Role to User</ui-button>
+            <div class="action-group">
+              <ui-select has-search icon="person" placeholder="Search users" :keys="{ label: 'name', value: 'id' }" :options="getUsersExRole(role)" v-model="userToAdd"></ui-select>
+              <ui-button :disabled="!userToAdd" @click="addRoleToUser(role, userToAdd)">Add to User</ui-button>
             </div>
           </div>
           <div>
             <div v-for="u in getUsersInRole(role)" class="roleUser">
-              <div>{{u.name}} ({{u.id}})</div>
+              <span>{{u.name}} ({{u.id}})</span>
               <ui-icon-button icon="remove" type="secondary" @click="removeRoleFromUser(role, u)"></ui-icon-button>
             </div>
           </div>
         </div>
         <div>
           <div class="actions">
-            <div>
-              <ui-select has-search label="Permission" placeholder="Search permission to add" 
+            <div class="action-group">
+              <ui-select has-search icon="security" placeholder="Search permissions" 
                 :keys="{ label: 'label', value: 'id' }" :options="getPermissionsWithoutRole(role)" v-model="permissionToAdd">
               </ui-select>
-              <ui-button :disabled="!permissionToAdd" @click="addPermissionToRole(permissionToAdd.permission, role)">Attach Permission to Role</ui-button>
+              <ui-button :disabled="!permissionToAdd" @click="addPermissionToRole(permissionToAdd.permission, role)">Attach to Role</ui-button>
             </div>
           </div>
           <div>
             <div v-for="p in getPermissionsWithRole(role)" class="roleUser">
-              <div>{{getPermissionLabel(p)}} ({{p.id}})</div>
-              <ui-icon-button icon="remove" type="secondary" @click="removePermissionFromRole(p, role)"></ui-icon-button>
+              <span>{{getPermissionLabel(p)}} ({{p.id}})</span>
+              <ui-icon-button icon="remove" type="secondary" size="small" @click="removePermissionFromRole(p, role)"></ui-icon-button>
             </div>
           </div>
         </div>
@@ -98,6 +98,32 @@ export default {
   display: flex;
 }
 .main-panel > div {
+  flex: 1;
+}
+.roleUser {
+  min-width: 120px;
+  display: inline-block;
+  background: rgba(120, 120, 120, 0.2);
+  margin: 10px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.ui-icon-button {
+  background: rgba(255, 120, 150, 0.7);
+  transition: all ease 400ms;
+}
+
+.ui-icon-button--type-primary.ui-icon-button:hover {
+  background: rgba(255, 90, 120, 0.9);
+}
+
+.action-group {
+  margin: 0 20px;
+  display: flex;
+}
+
+.action-group .ui-select {
   flex: 1;
 }
 </style>

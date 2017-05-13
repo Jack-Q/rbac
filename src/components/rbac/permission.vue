@@ -28,15 +28,15 @@
         <template v-if="permission">
           <div>Permission: {{permission.action}} {{resource.name}}</div>
           <div class="actions">
-            <div>
-              <ui-select has-search label="Role" placeholder="Search role to attach" :keys="{ label: 'name', value: 'id' }" :options="getRolesWithoutPermission(permission)" v-model="roleToAdd"></ui-select>
-              <ui-button :disabled="!roleToAdd" @click="addPermissionToRole(permission, roleToAdd)">Attach Permission to Role</ui-button>
+            <div class="action-group">
+              <ui-select has-search icon="group" placeholder="Search role to attach" :keys="{ label: 'name', value: 'id' }" :options="getRolesWithoutPermission(permission)" v-model="roleToAdd"></ui-select>
+              <ui-button :disabled="!roleToAdd" @click="addPermissionToRole(permission, roleToAdd)">Attach to Role</ui-button>
             </div>
           </div>
           <div>
             <div v-for="r in getRolesWithPermission(permission)" class="roleUser">
-              <div>{{r.name}} ({{r.id}})</div>
-              <ui-icon-button icon="remove" type="secondary" @click="removePermissionFromRole(permission, r)"></ui-icon-button>
+              <span>{{r.name}} ({{r.id}})</span>
+              <ui-icon-button icon="remove" type="primary" size="small" @click="removePermissionFromRole(permission, r)"></ui-icon-button>
             </div>
           </div>
         </template>
@@ -64,10 +64,10 @@ export default {
     };
   },
   beforeUpdate() {
-    if(this.resource && this.permission && this.permission.resource !== this.resource.id){
+    if (this.resource && this.permission && this.permission.resource !== this.resource.id) {
       this.permission = "";
     }
-    if(this.permission && this.roleToAdd && getRoles(this.permission).find(rp => rp.role === this.roleToAdd.id)){
+    if (this.permission && this.roleToAdd && getRoles(this.permission).find(rp => rp.role === this.roleToAdd.id)) {
       this.roleToAdd = "";
     }
   },
@@ -90,5 +90,29 @@ export default {
 </script>
 
 <style scoped>
+.roleUser {
+  min-width: 120px;
+  display: inline-block;
+  background: rgba(120, 120, 120, 0.2);
+  margin: 10px;
+  padding: 5px;
+  border-radius: 10px;
+}
 
+.ui-icon-button {
+  background: rgba(255, 120, 150, 0.7);
+  transition: all ease 400ms;
+}
+
+.ui-icon-button--type-primary.ui-icon-button:hover {
+  background: rgba(255, 90, 120, 0.9);
+}
+
+.action-group {
+  display: flex;
+}
+
+.action-group .ui-select {
+  flex: 1;
+}
 </style>

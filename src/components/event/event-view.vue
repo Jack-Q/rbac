@@ -2,7 +2,7 @@
   <div v-if="getEvent()" class="event-frame">
     <div class="result" :class="{success: getEvent().success}">
       <ui-icon v-if="getEvent().success">done</ui-icon>
-      <ui-icon v-if="!getEvent().success">clear</ui-icon>
+      <ui-icon v-if="!getEvent().success">do_not_disturb</ui-icon>
       <div class="message">{{getEvent().success ? 'success' : getEvent().result()}}</div>
     </div>
     <dl>
@@ -62,7 +62,7 @@ export default {
 
 .result.success {
   background: #5f5;
-  background: rgba(100, 255, 130, 0.8);
+  background: rgba(70, 255, 140, 0.8);
 }
 
 .result .ui-icon {

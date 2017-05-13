@@ -13,15 +13,15 @@
       <ui-textbox floating-label label="Name" placeholder="user name" v-model="user.name"></ui-textbox>
       <div class="actions">
         <ui-button @click="login(user)">log in CABR</ui-button>
-        <div>
-          <ui-select has-search label="Role" placeholder="Search role to add" :keys="{ label: 'name', value: 'id' }" :options="getRolesNotUser(user)" v-model="roleToAdd"></ui-select>
-          <ui-button :disabled="!roleToAdd" @click="addRoleToUser(roleToAdd, user)">Add Role to User</ui-button>
+        <div class="action-group">
+          <ui-select has-search icon="group" placeholder="Search role to add" :keys="{ label: 'name', value: 'id' }" :options="getRolesNotUser(user)" v-model="roleToAdd"></ui-select>
+          <ui-button :disabled="!roleToAdd" @click="addRoleToUser(roleToAdd, user)">Add to User</ui-button>
         </div>
       </div>
       <div>
         <div v-for="r in getRolesOfUser(user)" class="roleUser">
-          <div>{{r.name}} ({{r.id}})</div>
-          <ui-icon-button icon="remove" type="secondary" @click="removeRoleFromUser(r, user)"></ui-icon-button>
+          <span>{{r.name}} ({{r.id}})</span>
+          <ui-icon-button icon="remove" type="secondary" size="small" @click="removeRoleFromUser(r, user)"></ui-icon-button>
         </div>
       </div>
     </template>
@@ -64,5 +64,33 @@ export default {
 </script>
 
 <style scoped>
+.roleUser {
+  min-width: 120px;
+  display: inline-block;
+  background: rgba(120, 120, 120, 0.2);
+  margin: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  line-height: 32px;
+}
+.roleUser span{
+  height: 2.25em;
+}
 
+.ui-icon-button {
+  background: rgba(255, 120, 150, 0.7);
+  transition: all ease 400ms;
+}
+
+.ui-icon-button--type-primary.ui-icon-button:hover {
+  background: rgba(255, 90, 120, 0.9);
+}
+
+.action-group {
+  display: flex;
+}
+
+.action-group .ui-select {
+  flex: 1;
+}
 </style>
