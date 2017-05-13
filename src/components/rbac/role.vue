@@ -1,5 +1,8 @@
 <template>
   <tab-content fullHeight>
+    <div slot="toolbar">
+      <ui-button color="primary" @click="role = addRole()">Add New Role</ui-button>
+    </div>
     <div slot="list" v-for="r in getRoles()" @click="role = r">
       <aside-link :active="r === role">
         {{r.name}}
@@ -71,6 +74,7 @@ export default {
   },
   methods: {
     getRoles: () => store.roles,
+    addRole: () => store.addRole("New Role"),
     getUsersInRole: (r) => getInRole(r).map(ur => store.users.find(u => u.id === ur.user)),
     getUsersExRole: (r) => store.users.filter(u => !getInRole(r).some(ur => ur.user === u.id)),
     addRoleToUser: (r, u) => store.addRoleToUser(r, u),

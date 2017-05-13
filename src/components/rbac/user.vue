@@ -1,5 +1,8 @@
 <template>
   <tab-content fullHeight>
+    <div slot="toolbar">
+      <ui-button color="primary" @click="user = addUser()">Add New User</ui-button>
+    </div>
     <div slot="list" v-for="u in getUsers()" @click="user = u">
       <aside-link :active="u === user">
         {{u.name}}
@@ -40,12 +43,13 @@ export default {
     };
   },
   beforeUpdate() {
-    if(this.user && this.roleToAdd && getRoles(this.user).find(ur => ur.role === this.roleToAdd.id)){
+    if (this.user && this.roleToAdd && getRoles(this.user).find(ur => ur.role === this.roleToAdd.id)) {
       this.roleToAdd = "";
     }
   },
   methods: {
     getUsers: () => store.users,
+    addUser: () => store.addUser("New User"),
     getRolesOfUser: (u) => getRoles(u).map(ur => store.roles.find(r => r.id === ur.role)),
     getRolesNotUser: (u) => store.roles.filter(r => !getRoles(u).some(ur => ur.role === r.id)),
     addRoleToUser: (r, u) => store.addRoleToUser(r, u),

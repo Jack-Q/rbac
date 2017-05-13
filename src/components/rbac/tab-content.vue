@@ -4,7 +4,7 @@
       <div class="left-toolbar">
         <slot name="toolbar"></slot>
       </div>
-      <div>
+      <div class="list">
         <slot name="list"></slot>
       </div>
     </div>
@@ -28,16 +28,23 @@ export default {
   display: flex;
   height: 100%;
   flex: 1;
+  overflow: hidden;
 }
 
 .left-panel {
   width: 200px;
   background: #eeeeee;
+  display: flex;
+  flex-direction: column;
 }
 
 .right-panel {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.list{
+  overflow: auto;
 }
 </style>

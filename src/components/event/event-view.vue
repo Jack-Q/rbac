@@ -1,7 +1,8 @@
 <template>
   <div v-if="getEvent()" class="event-frame">
     <div class="result" :class="{success: getEvent().success}">
-      <ui-icon>done</ui-icon>
+      <ui-icon v-if="getEvent().success">done</ui-icon>
+      <ui-icon v-if="!getEvent().success">clear</ui-icon>
       <div class="message">{{getEvent().success ? 'success' : getEvent().result()}}</div>
     </div>
     <dl>
@@ -49,15 +50,31 @@ export default {
   width: 100%;
   border-radius: 20px;
   z-index: 100;
+  box-shadow: 0 0 20px 3px rgba(20, 20, 20, 0.3);
 }
 
-.result{
+.result {
+  color: #fff;
+  text-shadow: 0 0 4px rgba(50, 50, 60, 0.7);
   border-radius: 20px 20px 0 0;
-  height: 80px;
-  background: rgba(255,100,130,0.8);
+  background: rgba(255, 100, 130, 0.8);
 }
+
 .result.success {
   background: #5f5;
-  background: rgba(100,255,130,0.8);
+  background: rgba(100, 255, 130, 0.8);
+}
+
+.result .ui-icon {
+  font-size: 3em;
+  margin: 10px auto 0;
+}
+
+.message {
+  line-height: 40px;
+  border-top: dotted 1px #ccc;
+  margin: 0 20px;
+  font-size: 0.7em;
+  padding: 0;
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
   <tab-content fullHeight>
+    <div slot="toolbar">
+      <ui-button color="primary" @click="resource = addResource()">Add New Resource</ui-button>
+    </div>
     <div slot="list" v-for="r in getResources()" @click="resource = r">
       <aside-link :active="r === resource">
         {{r.name || "unnamed"}}
@@ -71,6 +74,7 @@ export default {
   methods: {
     getPermissions: (r) => store.permissions.filter(p => p.resource === r.id),
     getResources: () => store.resources,
+    addResource: () => store.addResource("New Resource"),
     getUnmappedActions: (r) => store.getUnmappedActions(r),
     getRolesWithPermission: (p) => getRoles(p).map(rp => store.roles.find(r => r.id === rp.role)),
     getRolesWithoutPermission: (p) => store.roles.filter(r => !getRoles(p).some(rp => rp.role === r.id)),

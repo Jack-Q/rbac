@@ -22,9 +22,11 @@ class Store {
 
   addUser(n) {
     this.users.push(new User(n));
+    return this.users[this.users.length - 1];
   }
   addRole(n) {
     this.roles.push(new Role(n));
+    return this.roles[this.roles.length - 1];
   }
   getUnmappedActions(r) {
     return actionList.filter(a => !this.permissions.some(p => p.action === a && p.resource === r.id));
@@ -34,6 +36,7 @@ class Store {
   }
   addResource(n) {
     this.resources.push(new Resource(n));
+    return this.resources[this.resources.length - 1];
   }
   addRoleToUser(r, u) {
     this.userRoles.push(new UserRole(u.id, r.id));
