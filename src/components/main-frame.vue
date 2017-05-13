@@ -9,7 +9,12 @@
       </svg>
     </a>
     <div class="header">
-      <div class="header-left">RBAC</div>
+      <div class="header-left">
+        <span>Role</span>
+        <span>Bases</span>
+        <span>Access</span>
+        <span>Control</span>
+      </div>
       <div class="header-right">
         <svg height="20" aria-label="code" viewBox="0 0 14 16" version="1.1" width="17" role="img">
           <path d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"></path>
@@ -137,13 +142,33 @@ a {
 
 .header-left {
   text-align: left;
-  padding: 0 30px;
+  padding-left: 30px;
   flex: 1;
   font-size: 1.3em;
+  transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 800ms;
+  letter-spacing: -1px;
+  word-spacing: -5px;
+  min-width: 100px;
+}
+
+.header-left span {
+  display: inline-block;
+  overflow: hidden;
+  max-width: 18px;
+  letter-spacing: 8px;
+  transition: inherit;
+}
+.header-left:hover {
+  padding-left: 20px;
+  word-spacing: 2px;
+  min-width: 270px;
+}
+.header-left:hover span{
+  max-width: 150px;
+  letter-spacing: -1px;
 }
 
 .header-right {
-  padding-left: 30px;
   padding-right: 70px;
   color: #999;
   transition: all ease 400ms;
