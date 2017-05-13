@@ -91,7 +91,7 @@ export default {
 
     deleteRole: (r) => store.removeRole(r),
     removeAllUsers: (r) => store.removeUserRoleByRole(r),
-    removeAllPermisssions: (r) => store.removeRolePermissionByRole(r),
+    removeAllPermissions: (r) => store.removeRolePermissionByRole(r),
   },
   components: {
     TabContent,

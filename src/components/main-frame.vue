@@ -62,7 +62,7 @@ export default {
   },
   components: {
     Cabr, Rbac, EventView,
-  },
+  }
 };
 </script>
 

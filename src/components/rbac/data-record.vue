@@ -351,6 +351,12 @@ export default {
   overflow: auto;
 }
 
+@media screen and (max-width: 1500px) {
+  .svg-container {
+    align-items: flex-start;
+  }
+}
+
 .tables {
   overflow-x: auto;
   flex: 1;

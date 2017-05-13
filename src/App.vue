@@ -6,6 +6,7 @@
 
 <script>
 import MainFrame from './components/main-frame';
+import store from '~/store';
 
 export default {
   name: 'app',

@@ -6,6 +6,9 @@ import UserRole from '~/model/user-role';
 import RolePermission from '~/model/role-permission';
 
 const actionList = ["click", "double-click", "right-click"];
+const localStorageKey = 'rbac_state';
+
+const tables = ['users', 'userRoles', 'roles', 'rolePermissions', 'permissions', 'resources'];
 
 class Store {
   constructor() {
@@ -156,18 +159,59 @@ class Store {
     this.event = null;
   }
 
+  dump() {
+    let dump = {};
+    tables.map(t => {
+      dump[t] = JSON.stringify(this[t]);
+    });
+    return dump;  
+  } 
+  
+  load(data) {
+    tables.map(t => {
+      this[t].length = 0;
+      JSON.parse(data[t]).map(i => this[t].push(i));
+    });
+  }
+
+  saveDump() {
+    console.log('save update');
+    if (window.localStorage)
+      window.localStorage.setItem(localStorageKey, JSON.stringify(this.dump()));
+  }
 }
 
 const store = new Store();
 
-store.addUser('Hind');
-store.addUser('Seed');
-store.addUser('Leed');
-store.addResource('Unload');
-store.addResource('Reset');
-store.addResource('Term');
-store.addRole('Super');
-store.addRole('Novel');
-store.addRole('Sinkr');
+const initSampleData = (store) => {
+  // user
+  let a = store.addUser('Alice');
+  let b = store.addUser('Bob');
+  let c = store.addUser('Cindy');
+  let d = store.addUser('Dave');
+  let e = store.addUser('Eve');
+  // role
+  let ra = store.addRole('admin');
+  let rb = store.addRole('visitor');
+  let rc = store.addRole('supervisor');
+  // resource
+  let pa = store.addResource('start-trigger');
+  let pb = store.addRole('terminator');
+  let pc = store.addRole('alternate');
+}
+
+if (window.localStorage && window.localStorage.getItem(localStorageKey)) {
+  try {
+    store.load(JSON.parse(window.localStorage.getItem(localStorageKey)));
+  } catch (e) {
+    initSampleData(store);
+  }
+} else {
+  initSampleData(store);
+}
+
+if (window.localStorage) {
+  setInterval(() => store.saveDump(), 500);
+}
 
 export default store;
