@@ -10,23 +10,33 @@
       </aside-link>
     </div>
     <template v-if="resource">
-      <div>Resource: {{resource.name || "Unnamed"}}({{resource.id}})</div>
-      <div>
+      <div class="detail">
+        <div>Resource Detail</div>
+        <ui-textbox floating-label label="Resource ID" disabled v-model="resource.id"></ui-textbox>
         <ui-textbox floating-label label="Resource Name" placeholder="resource name" v-model="resource.name"></ui-textbox>
+      </div>
+      <div class="actions">
+        <ui-button @click="resource = deleteResource(resource)">delete resource</ui-button>
+        <ui-button @click="addAllPermissions(resource)">add all permissions</ui-button>
+        <ui-button @click="deleteAllPermissions(resource)">remove all permission</ui-button>
       </div>
       <tab-content>
         <ui-button slot="toolbar" v-if="getUnmappedActions(resource).length" color="primary" has-dropdown ref="addResourceButton">
           <ui-menu contain-focus has-icons has-secondary-text slot="dropdown" :options="getUnmappedActions(resource)" @select="createPermission(resource, $event)" @close="$refs.addResourceButton.closeDropdown()"></ui-menu>
           Add Permission
         </ui-button>
-        <div slot="toolbar" v-if="!getUnmappedActions(resource).length">
+        <ui-button slot="toolbar" v-if="!getUnmappedActions(resource).length" color="primary" has-dropdown disabled>
           All actions are mapped
-        </div>
+        </ui-button>
         <div slot="list" v-for="p in getPermissions(resource)" @click="permission = p">
           <aside-link :active="p === permission">{{p.action}}</aside-link>
         </div>
         <template v-if="permission">
-          <div>Permission: {{permission.action}} {{resource.name}}</div>
+          <div class="permission-header">
+            <div>Permission: {{permission.action}} {{resource.name}}</div>
+            <ui-button @click="removeAllRoles(permission)">remove all roles</ui-button>
+            <ui-button @click="permission = deletePermission(permission)">delete permission</ui-button>
+          </div>
           <div class="actions">
             <div class="action-group">
               <ui-select has-search icon="group" placeholder="Search role to attach" :keys="{ label: 'name', value: 'id' }" :options="getRolesWithoutPermission(permission)" v-model="roleToAdd"></ui-select>
@@ -81,6 +91,11 @@ export default {
     createPermission: (resource, action) => store.addPermission(resource, action),
     addPermissionToRole: (p, r) => store.addPermissionToRole(p, r),
     removePermissionFromRole: (p, r) => store.removePermissionFromRole(p, r),
+    deletePermission: (p) => store.removePermission(p),
+    deleteResource: (r) => store.removeResource(r),
+    addAllPermissions: (r) => store.addAllPermissions(r),
+    deleteAllPermissions: (r) => store.removePermissionByResource(r),
+    removeAllRoles: (p) => store.removeRolePermissionByPermission(p),
   },
   components: {
     TabContent,
@@ -108,11 +123,30 @@ export default {
   background: rgba(255, 90, 120, 0.9);
 }
 
+.detail {
+  text-align: left;
+  padding: 30px 40px 0;
+  max-width: 450px;
+}
+
+.actions {
+  text-align: left;
+  padding: 20px 30px 0;
+  border-bottom: 1px solid #eee;
+}
+
 .action-group {
+  margin: 0 20px;
   display: flex;
 }
 
 .action-group .ui-select {
   flex: 1;
+}
+
+.permission-header{
+  text-align: left;
+  padding: 20px 20px 0;
+  background: #eee;
 }
 </style>

@@ -19,7 +19,7 @@
       <template v-if="getEvent().success">
         <dt>role</dt>
         <dd>
-          <span v-for="r in getEvent().claims">{{r.name}}</span>
+          <span class="role" v-for="r in getEvent().claims">{{r.name}}</span>
         </dd>
       </template>
     </dl>
@@ -97,5 +97,12 @@ dd{
   border-top: solid 1px #ccc;
   margin: 30px 0 0;
   font-size: 0.8em;
+}
+.role{
+  display: inline-block;
+  margin: 5px 10px;
+  background: #ded;
+  padding: 2px 5px;
+  border-radius: 5px;
 }
 </style>

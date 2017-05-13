@@ -33,6 +33,16 @@ export default {
     box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+} 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(120,120,120,0.3); 
+} 
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); 
+}
 div, span, ul, ol, dl, header, section, footer {
   cursor: default;
   user-select: none;

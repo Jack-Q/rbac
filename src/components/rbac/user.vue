@@ -10,13 +10,19 @@
       </aside-link>
     </div>
     <template v-if="user">
-      <ui-textbox floating-label label="Name" placeholder="user name" v-model="user.name"></ui-textbox>
+      <div class="detail">
+        <div>User Detail</div>
+        <ui-textbox floating-label label="ID" disabled v-model="user.id"></ui-textbox>
+        <ui-textbox floating-label label="Name" placeholder="user name" v-model="user.name"></ui-textbox>
+      </div>
       <div class="actions">
         <ui-button @click="login(user)">log in CABR</ui-button>
-        <div class="action-group">
-          <ui-select has-search icon="group" placeholder="Search role to add" :keys="{ label: 'name', value: 'id' }" :options="getRolesNotUser(user)" v-model="roleToAdd"></ui-select>
-          <ui-button :disabled="!roleToAdd" @click="addRoleToUser(roleToAdd, user)">Add to User</ui-button>
-        </div>
+        <ui-button @click="user = deleteUser(user)">delete user account</ui-button>
+        <ui-button @click="removeAllRoles(user)">remove all roles</ui-button>
+      </div>
+      <div class="action-group">
+        <ui-select has-search icon="group" placeholder="Search role to add" :keys="{ label: 'name', value: 'id' }" :options="getRolesNotUser(user)" v-model="roleToAdd"></ui-select>
+        <ui-button :disabled="!roleToAdd" @click="addRoleToUser(roleToAdd, user)">Add to User</ui-button>
       </div>
       <div>
         <div v-for="r in getRolesOfUser(user)" class="roleUser">
@@ -54,7 +60,10 @@ export default {
     getRolesNotUser: (u) => store.roles.filter(r => !getRoles(u).some(ur => ur.role === r.id)),
     addRoleToUser: (r, u) => store.addRoleToUser(r, u),
     removeRoleFromUser: (r, u) => store.removeRoleFromUser(r, u),
+
     login: u => store.login(u),
+    deleteUser: (u) => store.removeUser(u),
+    removeAllRoles: (u) => store.removeUserRoleByUser(u),
   },
   components: {
     TabContent,
@@ -73,7 +82,8 @@ export default {
   border-radius: 10px;
   line-height: 32px;
 }
-.roleUser span{
+
+.roleUser span {
   height: 2.25em;
 }
 
@@ -86,7 +96,20 @@ export default {
   background: rgba(255, 90, 120, 0.9);
 }
 
+.detail {
+  text-align: left;
+  padding: 30px 40px 0;
+  max-width: 450px;
+}
+
+.actions {
+  text-align: left;
+  padding: 20px 30px 0;
+  border-bottom: 1px solid #eee;
+}
+
 .action-group {
+  margin: 0 20px;
   display: flex;
 }
 

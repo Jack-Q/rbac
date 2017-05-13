@@ -93,8 +93,6 @@ header {
   padding: 10px;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
   overflow-y: auto;
   height: 100%;
 }

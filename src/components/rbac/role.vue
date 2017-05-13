@@ -9,16 +9,22 @@
         <span slot="sub">{{r.id}}</span>
       </aside-link>
     </div>
-    <div v-if="role">
-  
-      <ui-textbox floating-label label="Role Name" placeholder="role name" v-model="role.name"></ui-textbox>
+    <template v-if="role">
+      <div class="detail">
+        <div>Role Detail</div>
+        <ui-textbox floating-label label="Role ID" disabled v-model="role.id"></ui-textbox>
+        <ui-textbox floating-label label="Role Name" placeholder="role name" v-model="role.name"></ui-textbox>
+      </div>
+      <div class="actions">
+        <ui-button @click="role = deleteRole(role)">delete role</ui-button>
+        <ui-button @click="removeAllUsers(role)">remove from all users</ui-button>
+        <ui-button @click="removeAllPermissions(role)">remove all permissions</ui-button>
+      </div>
       <div class="main-panel">
         <div>
-          <div class="actions">
-            <div class="action-group">
-              <ui-select has-search icon="person" placeholder="Search users" :keys="{ label: 'name', value: 'id' }" :options="getUsersExRole(role)" v-model="userToAdd"></ui-select>
-              <ui-button :disabled="!userToAdd" @click="addRoleToUser(role, userToAdd)">Add to User</ui-button>
-            </div>
+          <div class="action-group">
+            <ui-select has-search icon="person" placeholder="Search users" :keys="{ label: 'name', value: 'id' }" :options="getUsersExRole(role)" v-model="userToAdd"></ui-select>
+            <ui-button :disabled="!userToAdd" @click="addRoleToUser(role, userToAdd)">Add to User</ui-button>
           </div>
           <div>
             <div v-for="u in getUsersInRole(role)" class="roleUser">
@@ -28,13 +34,10 @@
           </div>
         </div>
         <div>
-          <div class="actions">
-            <div class="action-group">
-              <ui-select has-search icon="security" placeholder="Search permissions" 
-                :keys="{ label: 'label', value: 'id' }" :options="getPermissionsWithoutRole(role)" v-model="permissionToAdd">
-              </ui-select>
-              <ui-button :disabled="!permissionToAdd" @click="addPermissionToRole(permissionToAdd.permission, role)">Attach to Role</ui-button>
-            </div>
+          <div class="action-group">
+            <ui-select has-search icon="security" placeholder="Search permissions" :keys="{ label: 'label', value: 'id' }" :options="getPermissionsWithoutRole(role)" v-model="permissionToAdd">
+            </ui-select>
+            <ui-button :disabled="!permissionToAdd" @click="addPermissionToRole(permissionToAdd.permission, role)">Attach to Role</ui-button>
           </div>
           <div>
             <div v-for="p in getPermissionsWithRole(role)" class="roleUser">
@@ -44,7 +47,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </template>
   </tab-content>
 </template>
 
@@ -81,10 +84,14 @@ export default {
     removeRoleFromUser: (r, u) => store.removeRoleFromUser(r, u),
     getPermissionsWithRole: (r) => getWithRole(r).map(rp => store.permissions.find(p => p.id === rp.permission)),
     getPermissionsWithoutRole: (r) => store.permissions.filter(p => !getWithRole(r).some(rp => rp.permission === p.id))
-        .map(p => ({id: p.id, label: store.getPermissionLabel(p), permission: p})),
+      .map(p => ({ id: p.id, label: store.getPermissionLabel(p), permission: p })),
     addPermissionToRole: (p, r) => store.addPermissionToRole(p, r),
     removePermissionFromRole: (p, r) => store.removePermissionFromRole(p, r),
     getPermissionLabel: (p) => store.getPermissionLabel(p),
+
+    deleteRole: (r) => store.removeRole(r),
+    removeAllUsers: (r) => store.removeUserRoleByRole(r),
+    removeAllPermisssions: (r) => store.removeRolePermissionByRole(r),
   },
   components: {
     TabContent,
@@ -94,12 +101,14 @@ export default {
 </script>
 
 <style scoped>
-.main-panel{
+.main-panel {
   display: flex;
 }
-.main-panel > div {
+
+.main-panel>div {
   flex: 1;
 }
+
 .roleUser {
   min-width: 120px;
   display: inline-block;
@@ -118,10 +127,23 @@ export default {
   background: rgba(255, 90, 120, 0.9);
 }
 
+.detail {
+  text-align: left;
+  padding: 30px 40px 0;
+  max-width: 450px;
+}
+
+.actions {
+  text-align: left;
+  padding: 20px 30px 0;
+  border-bottom: 1px solid #eee;
+}
+
 .action-group {
   margin: 0 20px;
   display: flex;
 }
+
 
 .action-group .ui-select {
   flex: 1;

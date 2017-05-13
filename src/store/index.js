@@ -24,9 +24,21 @@ class Store {
     this.users.push(new User(n));
     return this.users[this.users.length - 1];
   }
+  removeUser(u) {
+    this.removeUserRoleByUser(u);
+    if (this.loginUser === u) {
+      this.logout();
+    }
+    this.users.splice(this.users.indexOf(u), 1);
+  }
   addRole(n) {
     this.roles.push(new Role(n));
     return this.roles[this.roles.length - 1];
+  }
+  removeRole(r) {
+    this.removeUserRoleByRole(r);
+    this.removeRolePermissionByRole(r);
+    this.roles.splice(this.roles.indexOf(r), 1);
   }
   getUnmappedActions(r) {
     return actionList.filter(a => !this.permissions.some(p => p.action === a && p.resource === r.id));
@@ -34,9 +46,26 @@ class Store {
   addPermission(resource, action) {
     this.permissions.push(new Permission(resource.id, action));
   }
+  addAllPermissions(r) {
+    this.getUnmappedActions(r).map(a => this.addPermission(r, a));
+  }
+  removePermission(p) {
+    this.removeRolePermissionByPermission(p);
+    this.permissions.splice(this.permissions.indexOf(p), 1);
+  }
   addResource(n) {
     this.resources.push(new Resource(n));
     return this.resources[this.resources.length - 1];
+  }
+  removePermissionByResource(r) {
+    let p;
+    while (p = this.permissions.find(p => p.resource === r.id)) {
+      this.removePermission(p);
+    }
+  }
+  removeResource(r) {
+    this.removePermissionByResource(r);
+    this.resources.splice(this.resources.indexOf(r), 1);
   }
   addRoleToUser(r, u) {
     this.userRoles.push(new UserRole(u.id, r.id));
@@ -50,6 +79,33 @@ class Store {
   removePermissionFromRole(p, r) {
     this.rolePermissions.splice(this.rolePermissions.findIndex(rp => rp.role === r.id && rp.permission === p.id), 1);
   }
+
+
+  removeUserRoleByUser(u) {
+    let i;
+    while ((i = this.userRoles.findIndex(ur => ur.user === u.id)) !== -1) {
+      this.userRoles.splice(i, 1);
+    }
+  }
+  removeUserRoleByRole(r) {
+    let i;
+    while ((i = this.userRoles.findIndex(ur => ur.role === r.id)) !== -1) {
+      this.userRoles.splice(i, 1);
+    }
+  }
+  removeRolePermissionByRole(r) {
+    let i;
+    while ((i = this.rolePermissions.findIndex(rp => rp.role === r.id)) !== -1) {
+      this.rolePermissions.splice(i, 1);
+    }
+  }
+  removeRolePermissionByPermission(p) {
+    let i;
+    while ((i = this.rolePermissions.findIndex(rp => rp.permission === p.id)) !== -1) {
+      this.rolePermissions.splice(i, 1);
+    }
+  }
+
   getPermissionLabel(p) {
     return `${p.action} ${this.resources.find(r => r.id === p.resource).name}`;
   }
