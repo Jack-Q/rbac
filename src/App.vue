@@ -55,4 +55,10 @@ html, body {
     margin: 0;
     height: 100%;
 }
+.tip{
+  margin: 50px auto;
+  font-size: 2em;
+  font-weight: 100;
+  color: #ccc;
+}
 </style>

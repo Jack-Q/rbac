@@ -52,8 +52,9 @@
         </template>
       </tab-content>
     </template>
-    <div v-else>
-      Select an resource
+
+    <div v-else class="tip">
+      Select a resource or create a new one from left
     </div>
   </tab-content>
 </template>

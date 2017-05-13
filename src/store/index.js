@@ -123,7 +123,6 @@ class Store {
 
   emit(event) {
     // Event listener handles event
-    console.log(event);
     this.event = event;
 
     // access check
@@ -168,46 +167,51 @@ class Store {
   } 
   
   load(data) {
+    this.clearAll();
     tables.map(t => {
-      this[t].length = 0;
       JSON.parse(data[t]).map(i => this[t].push(i));
     });
   }
 
   saveDump() {
-    console.log('save update');
     if (window.localStorage)
       window.localStorage.setItem(localStorageKey, JSON.stringify(this.dump()));
+  }
+
+  clearAll() {
+    tables.map(t => {this[t].splice(0, this[t].length);});
+  }
+
+  resetToInitial() {
+    this.clearAll();
+    // user
+    let a = store.addUser('Alice');
+    let b = store.addUser('Bob');
+    let c = store.addUser('Cindy');
+    let d = store.addUser('Dave');
+    let e = store.addUser('Eve');
+    // role
+    let ra = store.addRole('admin');
+    let rb = store.addRole('visitor');
+    let rc = store.addRole('supervisor');
+    // resource
+    let pa = store.addResource('start-trigger');
+    let pb = store.addResource('terminator');
+    let pc = store.addResource('alternate');
   }
 }
 
 const store = new Store();
 
-const initSampleData = (store) => {
-  // user
-  let a = store.addUser('Alice');
-  let b = store.addUser('Bob');
-  let c = store.addUser('Cindy');
-  let d = store.addUser('Dave');
-  let e = store.addUser('Eve');
-  // role
-  let ra = store.addRole('admin');
-  let rb = store.addRole('visitor');
-  let rc = store.addRole('supervisor');
-  // resource
-  let pa = store.addResource('start-trigger');
-  let pb = store.addRole('terminator');
-  let pc = store.addRole('alternate');
-}
 
 if (window.localStorage && window.localStorage.getItem(localStorageKey)) {
   try {
     store.load(JSON.parse(window.localStorage.getItem(localStorageKey)));
   } catch (e) {
-    initSampleData(store);
+    store.resetToInitial();
   }
 } else {
-  initSampleData(store);
+  store.resetToInitial();
 }
 
 if (window.localStorage) {

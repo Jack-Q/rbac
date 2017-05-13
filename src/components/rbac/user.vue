@@ -31,6 +31,9 @@
         </div>
       </div>
     </template>
+    <div v-else class="tip">
+      Select a user or create a new one from left
+    </div>
   </tab-content>
 </template>
 
@@ -116,4 +119,5 @@ export default {
 .action-group .ui-select {
   flex: 1;
 }
+
 </style>

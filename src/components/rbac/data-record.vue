@@ -2,6 +2,10 @@
   <div class="panel">
     <div class="er-diagram">
       <div class="svg-header">Entity &amp; Relationship</div>
+      <div class="actions">
+        <ui-button @click="clearAll()">clear all data</ui-button>
+        <ui-button @click="resetToInitial()">reset to initial state</ui-button>
+      </div>
       <div class="svg-container">
   
         <svg xmlns="http://www.w3.org/2000/svg" height="232" width="596" version="1.1">
@@ -315,7 +319,8 @@ export default {
     getRolePermissions: () => store.rolePermissions,
     getPermissions: () => store.permissions,
     getResources: () => store.resources,
-
+    clearAll: () => store.clearAll(),
+    resetToInitial: () => store.resetToInitial(),
     selectTable(table) {
       this.table = table;
     }
@@ -342,12 +347,15 @@ export default {
   font-size: 1.2em;
 }
 
+.action {
+  height: 40px;
+}
 .svg-container {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: calc(100% - 60px);
+  height: calc(100% - 100px);
   overflow: auto;
 }
 

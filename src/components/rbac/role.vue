@@ -48,6 +48,9 @@
         </div>
       </div>
     </template>
+    <div v-else class="tip">
+      Select a role or create a new one from left
+    </div>
   </tab-content>
 </template>
 
