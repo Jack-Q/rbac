@@ -33,6 +33,11 @@ export default {
     box-sizing: border-box;
 }
 
+div, span, ul, ol, dl, header, section, footer {
+  cursor: default;
+  user-select: none;
+}
+
 html, body {
     font-size: 100%;
     padding: 0;

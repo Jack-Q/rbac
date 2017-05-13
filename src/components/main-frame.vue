@@ -203,6 +203,9 @@ a {
   position: relative;
   padding: 30px 10px;
   box-shadow: inset 0 0 120px 20px rgba(20, 20, 20, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cabr {
@@ -216,6 +219,7 @@ a {
 }
 
 .cabr.drop {
+  pointer-events: none;
   transform: rotateX(50deg);
   filter: blur(2px);
 }

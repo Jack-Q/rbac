@@ -77,4 +77,25 @@ export default {
   font-size: 0.7em;
   padding: 0;
 }
+
+dl{
+  text-align: left;
+  border-bottom: dotted 1px #aaa;
+  padding: 10px;
+  margin: 0 20px;
+}
+dt{
+  font-size: 0.9em;
+  position: absolute;
+  background: #ccc;
+  padding: 0 10px;
+  height: 20px;
+  border-radius: 10px 10px 0 0;
+  margin-top: 10px;
+}
+dd{
+  border-top: solid 1px #ccc;
+  margin: 30px 0 0;
+  font-size: 0.8em;
+}
 </style>
