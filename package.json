@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "A demonstration of Role Based Access Control",
   "author": "Jack Q <QiaoBo@outlook.com>",
-  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "GitHub",
+    "url": "https://github.com/Jack-Q/rbac.git"
+  },
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",

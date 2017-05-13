@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- RBAC Demonstration by Jack Q -->
+<svg xmlns="http://www.w3.org/2000/svg" style="font-family: sans-serif;font-size: 14px;" height="232" width="596" version="1.1">
+	<g id="Users">
+		<text style="font-weight:bold;" y="27.5" x="53.237213">
+			Users
+		</text>
+		<text y="51" x="15">
+			PK
+		</text>
+		<text y="51" x="42">
+			ID
+		</text>
+		<text y="66" x="42">
+			Name
+		</text>
+		<path d="m 10,10 120,0 0,60 -120,0 0,-60 z" style="fill:none;stroke:#000000;" />
+		<path d="m 37,33 0,37" style="stroke:#000000;" />
+		<path style="stroke:#000000;" d="M 9.9999981,32.999997 130,32.999997" />
+	</g>
+	<g id="Roles">
+		<rect x="197" y="10" width="120" height="60" style="fill:none;" />
+		<path d="m 197,10 120,0 0,60 -120,0 0,-60 z" style="fill:none;stroke:#000000;" />
+		<path d="m 197,33 120,0" style="fill:none;stroke:#000000;" />
+		<path d="m 224,33 0,37" style="fill:none;stroke:#000000;" />
+		<text style="font-weight:bold;" y="26.412415" x="241.78101">
+			Roles
+		</text>
+		<text y="51" x="202">
+			PK
+		</text>
+		<text y="51" x="229">
+			ID
+		</text>
+		<text y="66" x="229">
+			Name
+		</text>
+	</g>
+	<g id="Permissions">
+		<path d="m 370,10 120,0 0,75 -120,0 0,-75 z" style="fill:none;stroke:#000000;" />
+		<path d="m 370,33 120,0" style="fill:none;stroke:#000000;" />
+		<path d="m 397,33 0,52" style="fill:none;stroke:#000000;" />
+		<text style="font-weight:bold;" y="27.5" x="396.32483">
+			Permissions
+		</text>
+		<text y="51" x="375">
+			PK
+		</text>
+		<text y="51" x="402">
+			ID
+		</text>
+		<text y="66" x="375">
+			FK
+		</text>
+		<text y="66" x="402">
+			ResourceId
+		</text>
+		<text y="81" x="402">
+			Action
+		</text>
+	</g>
+	<g id="UserRoles">
+		<path d="m 106,162 106,0 0,60 -106,0 0,-60 z" style="fill:none;stroke:#000000;" />
+		<path d="m 106,185 106,0" style="fill:none;stroke:#000000;" />
+		<path d="m 152,185 0,37" style="fill:none;stroke:#000000;" />
+		<text style="font-weight:bold;" y="179.5" x="129.73721">
+			UserRoles
+		</text>
+		<text y="203" x="111">
+			PK,FK
+		</text>
+		<text y="203" x="157">
+			UserID
+		</text>
+		<text y="218" x="111">
+			PK,FK
+		</text>
+		<text y="218" x="157">
+			RoleID
+		</text>
+	</g>
+	<g id="RolePermissions">
+		<path d="m 274,162 144,0 0,60 -144,0 0,-60 z" style="fill:none;stroke:#000000;" />
+		<path d="m 274,185 144,0" style="fill:none;stroke:#000000;" />
+		<path d="m 320,185 0,37" style="fill:none;stroke:#000000;" />
+		<text style="font-weight:bold;" y="179.5" x="300">
+			RolePermissions
+		</text>
+		<text y="203" x="279">
+			PK,FK
+		</text>
+		<text y="203" x="325">
+			RoleID
+		</text>
+		<text y="218" x="279">
+			PK,FK
+		</text>
+		<text y="218" x="325">
+			PermissionID
+		</text>
+	</g>
+	<g id="Resources">
+		<path d="m 466,162 120,0 0,60 -120,0 0,-60 z" style="fill:none;stroke:#000000;" />
+		<path d="m 466,185 120,0" style="fill:none;stroke:#000000;" />
+		<path d="m 493,185 0,37" style="fill:none;stroke:#000000;" />
+		<text style="font-weight:bold;" y="179.5" x="499.5">
+			Resources
+		</text>
+		<text y="203" x="471">
+			PK
+		</text>
+		<text y="203" x="498">
+			ID
+		</text>
+		<text y="218" x="498">
+			Name
+		</text>
+	</g>
+	<g id="Linkages" style="fill:none;stroke:#000000;">
+		<path d="m 138.00002,33.041496 a 7.9990792,8.0599664 0 0 1 7.99908,8.059966 l 0,120.899498 m -15.99816,-128.959464 7.99908,0" />
+		<path d="m 146,148 -7,14" />
+		<path d="m 146,148 7,14" />
+		<path d="m 139,140 c 0,-3.86599 3.13401,-7 7,-7 3.86599,0 7,3.13401 7,7 0,3.86599 -3.13401,7 -7,7 -3.86599,0 -7,-3.13401 -7,-7 z" style="fill:#fff;" />
+		<path d="m 139,140 c 0,-3.86599 3.13401,-7 7,-7 3.86599,0 7,3.13401 7,7 0,3.86599 -3.13401,7 -7,7 -3.86599,0 -7,-3.13401 -7,-7 z" />
+		<path d="m 135.09672,27 0,14" />
+		<path d="m 197.00185,32.917125 -19.00256,0 m 0,0 a 8.0010792,7.8828113 0 0 0 -8.00108,7.882811 l 0,121.198224" />
+		<path d="m 170,148 -7,14" />
+		<path d="m 170,148 7,14" />
+		<path d="m 163,140 c 0,-3.86599 3.13401,-7 7,-7 3.86599,0 7,3.13401 7,7 0,3.86599 -3.13401,7 -7,7 -3.86599,0 -7,-3.13401 -7,-7 z" style="fill:#fff;" />
+		<path d="m 163,140 c 0,-3.86599 3.13401,-7 7,-7 3.86599,0 7,3.13401 7,7 0,3.86599 -3.13401,7 -7,7 -3.86599,0 -7,-3.13401 -7,-7 z" />
+		<path d="m 190,38 0,-14" />
+		<path d="m 317.00095,33.041509 4.9993,0 m 0,0 a 7.9988707,8.0599672 0 0 1 7.99887,8.059967 l 0,120.899504"  />
+		<path d="m 330,148 -7,14" />
+		<path d="m 330,148 7,14" />
+		<path d="m 323,140 c 0,-3.86599 3.13401,-7 7,-7 3.86599,0 7,3.13401 7,7 0,3.86599 -3.13401,7 -7,7 -3.86599,0 -7,-3.13401 -7,-7 z" style="fill:#fff;" />
+		<path d="m 323,140 c 0,-3.86599 3.13401,-7 7,-7 3.86599,0 7,3.13401 7,7 0,3.86599 -3.13401,7 -7,7 -3.86599,0 -7,-3.13401 -7,-7 z" />
+		<path d="m 323.32709,27 0,14" />
+		<path d="m 370.00167,32.725427 -8.00163,0 m 0,0 a 8.001628,7.8945288 0 0 0 -8.00163,7.894529 l 0,121.378384"  />
+		<path d="m 354,148 -7,14" />
+		<path d="m 354,148 7,14" />
+		<path d="m 347,140 c 0,-3.86599 3.13401,-7 7,-7 3.86599,0 7,3.13401 7,7 0,3.86599 -3.13401,7 -7,7 -3.86599,0 -7,-3.13401 -7,-7 z" style="fill:#fff;" />
+		<path d="m 347,140 c 0,-3.86599 3.13401,-7 7,-7 3.86599,0 7,3.13401 7,7 0,3.86599 -3.13401,7 -7,7 -3.86599,0 -7,-3.13401 -7,-7 z" />
+		<path d="m 363.19226,40 0,-14" />
+		<path d="m 537.99945,161.80831 0,-120.539684 m 0,0 a 7.9998138,8.0359792 0 0 0 -7.99982,-8.035979 l -39.99907,0" />
+		<path d="m 504,33.0387 -14,-7" />
+		<path d="m 503.80774,33.34583 -14,7" />
+		<path d="m 505,34 c 0,-3.86599 3.13401,-7 7,-7 3.86599,0 7,3.13401 7,7 0,3.86599 -3.13401,7 -7,7 -3.86599,0 -7,-3.13401 -7,-7 z" style="fill:#fff;" />
+		<path d="m 505,34 c 0,-3.86599 3.13401,-7 7,-7 3.86599,0 7,3.13401 7,7 0,3.86599 -3.13401,7 -7,7 -3.86599,0 -7,-3.13401 -7,-7 z" />
+		<path d="m 531,155 14,0" />
+	</g>
+</svg>
