@@ -12,10 +12,13 @@
         <ui-textbox floating-label label="Resource Name" placeholder="resource name" v-model="resource.name"></ui-textbox>
       </div>
       <tab-content>
-        <ui-button slot="toolbar" color="primary" has-dropdown ref="addResourceButton">
+        <ui-button slot="toolbar" v-if="getUnmappedActions(resource).length" color="primary" has-dropdown ref="addResourceButton">
           <ui-menu contain-focus has-icons has-secondary-text slot="dropdown" :options="getUnmappedActions(resource)" @select="createPermission(resource, $event)" @close="$refs.addResourceButton.closeDropdown()"></ui-menu>
           Add Permission
         </ui-button>
+        <div slot="toolbar" v-if="!getUnmappedActions(resource).length">
+          All actions are mapped
+        </div>
         <div slot="list" v-for="p in getPermissions(resource)" @click="permission = p">
           <aside-link :active="p === permission">{{p.action}}</aside-link>
         </div>
@@ -68,7 +71,7 @@ export default {
   methods: {
     getPermissions: (r) => store.permissions.filter(p => p.resource === r.id),
     getResources: () => store.resources,
-    getUnmappedActions: (resource) => ["add", "drop", "create"],
+    getUnmappedActions: (r) => store.getUnmappedActions(r),
     getRolesWithPermission: (p) => getRoles(p).map(rp => store.roles.find(r => r.id === rp.role)),
     getRolesWithoutPermission: (p) => store.roles.filter(r => !getRoles(p).some(rp => rp.role === r.id)),
     createPermission: (resource, action) => store.addPermission(resource, action),

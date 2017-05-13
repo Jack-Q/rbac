@@ -1,8 +1,8 @@
 import shortid from 'shortid';
 
 export default class User {
-  constructor() {
+  constructor(name) {
     this.id = shortid();
-    this.name = 'anonymous';
+    this.name = name || 'anonymous';
   }
 }

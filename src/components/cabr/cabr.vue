@@ -45,7 +45,7 @@ export default {
             store.emit({action: 'double-click', resourceId, userId});
           }
           this.click[resourceId] = 0;
-        }, 300);
+        }, 200);
       }
 
       

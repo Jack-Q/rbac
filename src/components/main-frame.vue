@@ -27,7 +27,7 @@
         <div class="cabr">
           <cabr></cabr>
         </div>
-        <div class="event">
+        <div class="event" v-if="getEvent()">
           <event-view></event-view>
         </div>
       </div>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import store from '~/store';
+
 import Cabr from './cabr/cabr';
 import Rbac from './rbac/rbac';
 import EventView from './event/event-view';
@@ -49,6 +51,9 @@ export default {
     return {
       msg: 'Constructing RBAC ...',
     };
+  },
+  methods: {
+    getEvent: ()=> store.event,
   },
   components: {
     Cabr, Rbac, EventView,
@@ -162,6 +167,7 @@ a {
 }
 .main-left{
   width: 350px;
+  position: relative;
 }
 .cabr{
   box-shadow: inset 0 0 20px 5px rgba(20,20,20,0.3);
@@ -170,8 +176,10 @@ a {
 }
 .event{
   position: absolute;
-  margin: 50px;
+  padding: 30px;
   top: 40px;
+  z-index: 100;
+  width: 100%;
 }
 .main-right{
   width: calc(100vw - 350px);
