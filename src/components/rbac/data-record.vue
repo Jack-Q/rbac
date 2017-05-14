@@ -347,8 +347,9 @@ export default {
   font-size: 1.2em;
 }
 
-.action {
+.actions {
   height: 40px;
+  line-height: 40px;
 }
 .svg-container {
   display: flex;

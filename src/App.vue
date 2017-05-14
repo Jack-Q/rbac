@@ -23,9 +23,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding-top: 40px;
   font-size: 18px;
   height: 100%;
+  overflow: hidden;
 }
 
 *,
@@ -54,6 +54,7 @@ html, body {
     padding: 0;
     margin: 0;
     height: 100%;
+    overflow: hidden;
 }
 .tip{
   margin: 50px auto;

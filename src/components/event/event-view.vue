@@ -51,6 +51,9 @@ export default {
   border-radius: 20px;
   z-index: 100;
   box-shadow: 0 0 20px 3px rgba(20, 20, 20, 0.3);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .result {
@@ -78,31 +81,38 @@ export default {
   padding: 0;
 }
 
-dl{
+dl {
   text-align: left;
   border-bottom: dotted 1px #aaa;
   padding: 10px;
   margin: 0 20px;
+  flex: 1;
+  overflow-y: auto;
 }
-dt{
+
+dt {
   font-size: 0.9em;
-  position: absolute;
+  position: relative;
+  width: fit-content;
   background: #ccc;
   padding: 0 10px;
   height: 20px;
   border-radius: 10px 10px 0 0;
   margin-top: 10px;
 }
-dd{
+
+dd {
   border-top: solid 1px #ccc;
-  margin: 30px 0 0;
+  margin: 0;
   font-size: 0.8em;
 }
-.role{
+
+.role {
   display: inline-block;
   margin: 5px 10px;
   background: #ded;
   padding: 2px 5px;
   border-radius: 5px;
 }
+
 </style>

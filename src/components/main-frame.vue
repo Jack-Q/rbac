@@ -23,12 +23,11 @@
         <svg height="20" aria-label="love" viewBox="0 0 12 16" version="1.1" width="15" role="img">
           <path d="M11.2 3c-.52-.63-1.25-.95-2.2-1-.97 0-1.69.42-2.2 1-.51.58-.78.92-.8 1-.02-.08-.28-.42-.8-1-.52-.58-1.17-1-2.2-1-.95.05-1.69.38-2.2 1-.52.61-.78 1.28-.8 2 0 .52.09 1.52.67 2.67C1.25 8.82 3.01 10.61 6 13c2.98-2.39 4.77-4.17 5.34-5.33C11.91 6.51 12 5.5 12 5c-.02-.72-.28-1.39-.8-2.02V3z"></path>
         </svg>
-        by
-        Jack Q
+        by Jack Q
       </a>
     </div>
     <div class="main">
-      <div class="main-left">
+      <div class="main-left" :class="{ active: mode === 'cabr' }">
         <div class="cabr" :class="{drop: getEvent()}">
           <cabr></cabr>
         </div>
@@ -36,9 +35,13 @@
           <event-view></event-view>
         </div>
       </div>
-      <div class="main-right">
+      <div class="main-right" :class="{ active: mode === 'rbac' }">
         <rbac></rbac>
       </div>
+    </div>
+    <div class="switcher">
+      <div @click="mode='cabr'" :class="{ active: mode === 'cabr' }">Events</div>
+      <div @click="mode='rbac'" :class="{ active: mode === 'rbac' }">RBAC Management</div>
     </div>
   </div>
 </template>
@@ -55,6 +58,7 @@ export default {
   data() {
     return {
       msg: 'Constructing RBAC ...',
+      mode: 'cabr',
     };
   },
   methods: {
@@ -69,6 +73,10 @@ export default {
 <style scoped>
 .container {
   height: 100%;
+  padding-top: 40px;
+  overflow: hidden;
+  background: #ccc;
+  transition: all ease 400ms;
 }
 
 h1,
@@ -138,6 +146,7 @@ a {
   display: flex;
   background: #ccc;
   line-height: 40px;
+  overflow: hidden;
 }
 
 .header-left {
@@ -195,12 +204,16 @@ a {
 .main {
   display: flex;
   height: 100%;
+  position: relative;
+}
+.main > div{
+  transition: all ease 400ms;
 }
 
 .main-left {
   width: 350px;
   position: relative;
-  padding: 30px 10px;
+  padding: 10px;
   box-shadow: inset 0 0 120px 20px rgba(20, 20, 20, 0.3);
   display: flex;
   justify-content: center;
@@ -215,6 +228,7 @@ a {
   transition: all ease 400ms;
   transform-origin: bottom center;
   max-height: 550px;
+  max-width: 350px; 
 }
 
 .cabr.drop {
@@ -225,15 +239,21 @@ a {
 
 .event {
   left: 0;
+  right: 0;
   position: absolute;
   padding: 30px;
-  top: 40px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
   z-index: 100;
   width: 100%;
   transition: all ease 400ms;
   transform: translateY(-300px);
   pointer-events: none;
   opacity: 0;
+  height: 100%;
+  max-height: 450px;
+  max-width: 400px;
 }
 
 .event.drop {
@@ -244,5 +264,73 @@ a {
 
 .main-right {
   width: calc(100vw - 350px);
+}
+
+.switcher {
+  position: absolute;
+  bottom: -40px;
+  height: 40px;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  background-color: #ccc;
+  transition: all ease 400ms;
+  z-index: 10;
+}
+
+.switcher div {
+  flex: 1;
+  line-height: 40px;
+  position: relative;
+  color: #999;
+  transition: all ease 400ms;
+  cursor: pointer;
+}
+.switcher div.active{
+  color: #555;
+}
+.switcher div::after {
+  display: block;
+  content: '';
+  border: transparent 8px solid;
+  border-bottom: 8px #555 solid;
+  position: absolute;
+  left: 50%;
+  margin-left: -8px;
+  bottom: -10px;
+  z-index: 1;
+  transition: all ease 400ms;
+}
+.switcher div.active::after {
+  opacity: 1;
+  bottom: 0;
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    padding-bottom: 40px;
+  }
+  .switcher {
+    bottom: 0;
+  }
+  .switcher>div {
+    cursor: pointer;
+  }
+  .main {
+    display: block;
+  }
+  .main > div {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: -100%;
+    opacity: 0;
+    z-index: 1;
+  }
+  .main > div.active {
+    left: 0;
+    opacity: 1;
+    z-index: 2;
+  }
 }
 </style>
