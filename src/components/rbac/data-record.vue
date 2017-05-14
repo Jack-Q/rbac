@@ -158,7 +158,8 @@
         </svg>
       </div>
     </div>
-    <div class="tables">
+    <div class="tables" :class="{active: showTable}">
+      <div class="close"><ui-icon-button icon="close" type="secondary" @click="showTable = false"></ui-icon-button></div>
       <div v-if="table==='users'" class="tab">
         <div class="tbl-caption">User Data</div>
         <div class="tbl-header">
@@ -310,6 +311,7 @@ export default {
   data() {
     return {
       table: 'users',
+      showTable: false,
     };
   },
   methods: {
@@ -323,6 +325,7 @@ export default {
     resetToInitial: () => store.resetToInitial(),
     selectTable(table) {
       this.table = table;
+      this.showTable = true;
     }
   },
 };
@@ -372,6 +375,7 @@ export default {
   max-width: 600px;
   height: 100%;
   background: #dadada;
+  position: relative;
 }
 
 .tab {
@@ -451,5 +455,37 @@ svg .active .bg {
 .svg-table {
   fill: transparent;
   cursor: pointer;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 60px;
+  line-height: 60px;
+  width: 60px;
+  text-align: center;
+  opacity: 0;
+  transition: all ease 400ms;
+}
+
+@media screen and (max-width: 1024px){
+  .close {
+    opacity: 1;
+  }
+  .tables {
+    height: 100%;
+    position: absolute;
+    right: -100%;
+    width: 100%;
+    max-width: 450px;
+    z-index: 10;
+    transition: all ease 400ms;
+    opacity: 0;
+  }
+  .tables.active {
+    right: 0;
+    opacity: 1;
+  }
 }
 </style>

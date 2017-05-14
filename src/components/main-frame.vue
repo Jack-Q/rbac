@@ -312,7 +312,7 @@ a {
     font-size: 0.7em;
   }
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
   .container {
     padding-bottom: 40px;
   }
