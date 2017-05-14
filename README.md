@@ -13,11 +13,11 @@ To focus on the cor concepts of *RBAC*, this demonstration illustrates
 this model with a set of minimal virtual tables covering the entities and
 connections listed above. (shows as the following E-R diagram)
 
-![min](https://cdn.rawgit.com/Jack-Q/rbac/master/doc/er.svg)
+![min](https://cdn.rawgit.com/Jack-Q/rbac/82ba3a587bf486686164506084e9b2a839436ae3/doc/er.svg)
 
 ## Preview
 
-* visit [git.io/rbac](https://git.io/rbac/)
+* visit [git.io/rbac](https://git.io/rbac)
 
 ![ok](doc/demo_ok.png)
 
