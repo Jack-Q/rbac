@@ -98,6 +98,18 @@ a {
   color: #42b983;
 }
 
+a.github-corner {
+  transform: rotate(45deg);
+  width: 114px;
+  height: 114px;
+  position: fixed;
+  top: -57px;
+  right: -57px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+
 .github-corner svg {
   fill: #70B7FD;
   color: #fff;
@@ -106,6 +118,7 @@ a {
   border: 0;
   right: 0;
   z-index: 10000;
+  transform: rotate(-45deg) translate(-64px, 40px);
 }
 
 .github-corner:hover .octo-arm {
@@ -206,7 +219,8 @@ a {
   height: 100%;
   position: relative;
 }
-.main > div{
+
+.main>div {
   transition: all ease 400ms;
 }
 
@@ -228,7 +242,7 @@ a {
   transition: all ease 400ms;
   transform-origin: bottom center;
   max-height: 550px;
-  max-width: 350px; 
+  max-width: 350px;
 }
 
 .cabr.drop {
@@ -288,9 +302,11 @@ a {
   overflow: hidden;
   height: 40px;
 }
-.switcher div.active{
+
+.switcher div.active {
   color: #555;
 }
+
 .switcher div::after {
   display: block;
   content: '';
@@ -303,15 +319,18 @@ a {
   z-index: 1;
   transition: all ease 400ms;
 }
+
 .switcher div.active::after {
   opacity: 1;
   bottom: 0;
 }
-@media screen and (max-width: 1024px){
-  .main-right{
+
+@media screen and (max-width: 1024px) {
+  .main-right {
     font-size: 0.7em;
   }
 }
+
 @media screen and (max-width: 800px) {
   .container {
     padding-bottom: 40px;
@@ -325,7 +344,7 @@ a {
   .main {
     display: block;
   }
-  .main > div {
+  .main>div {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -333,7 +352,7 @@ a {
     opacity: 0;
     z-index: 1;
   }
-  .main > div.active {
+  .main>div.active {
     left: 0;
     opacity: 1;
     z-index: 2;
