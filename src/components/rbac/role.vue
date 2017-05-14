@@ -21,25 +21,25 @@
         <ui-button @click="removeAllPermissions(role)">remove all permissions</ui-button>
       </div>
       <div class="main-panel">
-        <div>
+        <div class="action-panel">
           <div class="action-group">
             <ui-select has-search icon="person" placeholder="Search users" :keys="{ label: 'name', value: 'id' }" :options="getUsersExRole(role)" v-model="userToAdd"></ui-select>
             <ui-button :disabled="!userToAdd" @click="addRoleToUser(role, userToAdd)">Add to User</ui-button>
           </div>
-          <div>
+          <div class="action-item-list">
             <div v-for="u in getUsersInRole(role)" class="roleUser">
               <span>{{u.name}} ({{u.id}})</span>
               <ui-icon-button icon="remove" type="secondary" @click="removeRoleFromUser(role, u)"></ui-icon-button>
             </div>
           </div>
         </div>
-        <div>
+        <div class="action-panel">
           <div class="action-group">
             <ui-select has-search icon="security" placeholder="Search permissions" :keys="{ label: 'label', value: 'id' }" :options="getPermissionsWithoutRole(role)" v-model="permissionToAdd">
             </ui-select>
             <ui-button :disabled="!permissionToAdd" @click="addPermissionToRole(permissionToAdd.permission, role)">Attach to Role</ui-button>
           </div>
-          <div>
+          <div class="action-item-list">
             <div v-for="p in getPermissionsWithRole(role)" class="roleUser">
               <span>{{getPermissionLabel(p)}} ({{p.id}})</span>
               <ui-icon-button icon="remove" type="secondary" size="small" @click="removePermissionFromRole(p, role)"></ui-icon-button>
@@ -106,6 +106,10 @@ export default {
 <style scoped>
 .main-panel {
   display: flex;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 100%;
 }
 
 .main-panel>div {
@@ -130,25 +134,4 @@ export default {
   background: rgba(255, 90, 120, 0.9);
 }
 
-.detail {
-  text-align: left;
-  padding: 30px 40px 0;
-  max-width: 450px;
-}
-
-.actions {
-  text-align: left;
-  padding: 20px 30px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.action-group {
-  margin: 0 20px;
-  display: flex;
-}
-
-
-.action-group .ui-select {
-  flex: 1;
-}
 </style>

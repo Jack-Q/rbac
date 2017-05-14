@@ -34,16 +34,16 @@
         <template v-if="permission">
           <div class="permission-header">
             <div>Permission: {{permission.action}} {{resource.name}}</div>
+          </div>
+          <div class="actions">
             <ui-button @click="removeAllRoles(permission)">remove all roles</ui-button>
             <ui-button @click="permission = deletePermission(permission)">delete permission</ui-button>
           </div>
-          <div class="actions">
-            <div class="action-group">
-              <ui-select has-search icon="group" placeholder="Search role to attach" :keys="{ label: 'name', value: 'id' }" :options="getRolesWithoutPermission(permission)" v-model="roleToAdd"></ui-select>
-              <ui-button :disabled="!roleToAdd" @click="addPermissionToRole(permission, roleToAdd)">Attach to Role</ui-button>
-            </div>
+          <div class="action-group">
+            <ui-select has-search icon="group" placeholder="Search role to attach" :keys="{ label: 'name', value: 'id' }" :options="getRolesWithoutPermission(permission)" v-model="roleToAdd"></ui-select>
+            <ui-button :disabled="!roleToAdd" @click="addPermissionToRole(permission, roleToAdd)">Attach to Role</ui-button>
           </div>
-          <div>
+          <div class="action-item-list">
             <div v-for="r in getRolesWithPermission(permission)" class="roleUser">
               <span>{{r.name}} ({{r.id}})</span>
               <ui-icon-button icon="remove" type="primary" size="small" @click="removePermissionFromRole(permission, r)"></ui-icon-button>
@@ -122,27 +122,6 @@ export default {
 
 .ui-icon-button--type-primary.ui-icon-button:hover {
   background: rgba(255, 90, 120, 0.9);
-}
-
-.detail {
-  text-align: left;
-  padding: 30px 40px 0;
-  max-width: 450px;
-}
-
-.actions {
-  text-align: left;
-  padding: 20px 30px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.action-group {
-  margin: 0 20px;
-  display: flex;
-}
-
-.action-group .ui-select {
-  flex: 1;
 }
 
 .permission-header{

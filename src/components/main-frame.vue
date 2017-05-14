@@ -285,6 +285,8 @@ a {
   color: #999;
   transition: all ease 400ms;
   cursor: pointer;
+  overflow: hidden;
+  height: 40px;
 }
 .switcher div.active{
   color: #555;
@@ -305,7 +307,11 @@ a {
   opacity: 1;
   bottom: 0;
 }
-
+@media screen and (max-width: 1024px){
+  .main-right{
+    font-size: 0.7em;
+  }
+}
 @media screen and (max-width: 700px) {
   .container {
     padding-bottom: 40px;

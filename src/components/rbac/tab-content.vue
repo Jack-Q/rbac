@@ -39,12 +39,31 @@ export default {
 }
 
 .right-panel {
-  flex: 1;
+  width: calc(100% - 200px);
   display: flex;
   flex-direction: column;
 }
 
 .list{
   overflow: auto;
+}
+
+@media screen and (max-width: 1024px){
+  .left-panel{
+    width: 130px;
+    flex-shrink: 0;
+  }
+  .right-panel {
+    width: calc(100% - 130px);
+  }
+}
+@media screen and (max-width: 640px){
+  .left-panel {
+    width: 80px;
+  }
+
+  .right-panel {
+    width: calc(100vw - 80px);
+  }
 }
 </style>

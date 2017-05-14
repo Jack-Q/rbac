@@ -22,9 +22,10 @@
       </div>
       <div class="action-group">
         <ui-select has-search icon="group" placeholder="Search role to add" :keys="{ label: 'name', value: 'id' }" :options="getRolesNotUser(user)" v-model="roleToAdd"></ui-select>
-        <ui-button :disabled="!roleToAdd" @click="addRoleToUser(roleToAdd, user)">Add to User</ui-button>
+        <ui-button ref="btn-add" :disabled="!roleToAdd" @click="addRoleToUser(roleToAdd, user)" icon="add" size="small" >
+        </ui-button>
       </div>
-      <div>
+      <div class="action-item-list">
         <div v-for="r in getRolesOfUser(user)" class="roleUser">
           <span>{{r.name}} ({{r.id}})</span>
           <ui-icon-button icon="remove" type="secondary" size="small" @click="removeRoleFromUser(r, user)"></ui-icon-button>
@@ -99,25 +100,5 @@ export default {
   background: rgba(255, 90, 120, 0.9);
 }
 
-.detail {
-  text-align: left;
-  padding: 30px 40px 0;
-  max-width: 450px;
-}
-
-.actions {
-  text-align: left;
-  padding: 20px 30px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.action-group {
-  margin: 0 20px;
-  display: flex;
-}
-
-.action-group .ui-select {
-  flex: 1;
-}
 
 </style>

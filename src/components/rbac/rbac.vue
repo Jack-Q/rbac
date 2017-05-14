@@ -43,4 +43,10 @@ export default {
 .ui-tab{
   height: calc(100vh - 83px);
 }
+
+@media screen and (max-width: 800px){
+  .ui-tab {
+    height: calc(100vh - 123px);
+  }
+}
 </style>
