@@ -1,6 +1,6 @@
 <template>
   <div class="panel">
-    <div class="er-diagram">
+    <div class="er-diagram" :class="{blur: showTable}">
       <div class="svg-header">Entity &amp; Relationship</div>
       <div class="actions">
         <ui-button @click="clearAll()">clear all data</ui-button>
@@ -157,6 +157,7 @@
           </g>
         </svg>
       </div>
+      <div class="er-overlay" :class="{active: showTable}"  @click="showTable = false"></div>
     </div>
     <div class="tables" :class="{active: showTable}">
       <div class="close"><ui-icon-button icon="close" type="secondary" @click="showTable = false"></ui-icon-button></div>
@@ -341,6 +342,7 @@ export default {
   flex: 1;
   background: #fafafa;
   width: 0;
+  position: relative;
 }
 
 .svg-header {
@@ -367,6 +369,19 @@ export default {
   .svg-container {
     align-items: flex-start;
   }
+}
+
+.er-overlay {
+  pointer-events: none;
+  opacity: 0;
+  background-color: rgba(35, 35, 35, 0.3);
+  transition: all ease 400ms;
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 
 .tables {
@@ -470,9 +485,13 @@ svg .active .bg {
 }
 
 @media screen and (max-width: 1024px){
+  .er-diagram.blur {
+    filter: blur(3px);
+  }
   .close {
     opacity: 1;
   }
+
   .tables {
     height: 100%;
     position: absolute;
@@ -485,6 +504,12 @@ svg .active .bg {
   }
   .tables.active {
     right: 0;
+    opacity: 1;
+  }
+
+  .er-overlay.active {
+    pointer-events: all;
+    display: block;
     opacity: 1;
   }
 }

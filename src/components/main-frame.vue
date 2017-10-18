@@ -57,7 +57,6 @@ export default {
   name: 'main-frame',
   data() {
     return {
-      msg: 'Constructing RBAC ...',
       mode: 'cabr',
     };
   },
@@ -225,7 +224,8 @@ a.github-corner {
 }
 
 .main-left {
-  width: 350px;
+  width: 330px;
+  flex: 1;
   position: relative;
   padding: 10px;
   box-shadow: inset 0 0 120px 20px rgba(20, 20, 20, 0.3);
@@ -277,7 +277,9 @@ a.github-corner {
 }
 
 .main-right {
-  width: calc(100vw - 350px);
+  width: 400px;
+  max-width: 1200px;
+  flex: 4;
 }
 
 .switcher {
