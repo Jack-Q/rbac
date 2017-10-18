@@ -198,6 +198,20 @@ class Store {
     let pa = store.addResource('start-trigger');
     let pb = store.addResource('terminator');
     let pc = store.addResource('alternate');
+    // user-role
+    store.addRoleToUser(ra, a);
+    store.addRoleToUser(rc, a);
+    store.addRoleToUser(rb, c);
+    store.addRoleToUser(rb, d);
+    store.addRoleToUser(rb, e);
+    // permission
+    let saClick = store.addPermission(pa, actionList[0]);
+    let saDblClick = store.addPermission(pa, actionList[1]);
+    // role-permission
+    store.addPermissionToRole(saClick, ra);
+    store.addPermissionToRole(saClick, rc);
+    store.addPermissionToRole(saDblClick, ra);
+    store.addPermissionToRole(saDblClick, rc);
   }
 }
 
